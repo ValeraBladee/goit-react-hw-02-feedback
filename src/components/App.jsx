@@ -1,16 +1,22 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import { Section, Feedback, dataButtonKey, Statistics } from 'components';
+import { Component } from 'react';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+export class App extends Component {
+  state = dataButtonKey();
+  addFeedback = itemText => {
+    this.setState({ [itemText]: this.state[itemText] + 1 });
+    Notify.success(`Your feedback: ${itemText} is accepted`);
+  };
+  render() {
+    return (
+      <>
+        <Section title="please leave feedback">
+          <Feedback addFeedback={this.addFeedback} />
+        </Section>
+        <Section title="statistics">
+          <Statistics data={this.state} />
+        </Section>
+      </>
+    );
+  }
+}
