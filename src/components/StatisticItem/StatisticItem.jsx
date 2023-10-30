@@ -1,8 +1,8 @@
-const StatisticItem = ({ itemKey, itemValue }) => {
-    return (
-        <p>
-            {itemKey}: {itemValue}
-        </p>
-    )
+const StatisticItem = ({ itemKey, itemValue = 0 }) => {
+  return (
+    <p>
+      {itemKey}: {itemValue} {itemKey === 'Positive feedback' && '%'}
+    </p>
+  );
 };
 export default StatisticItem;

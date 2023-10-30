@@ -1,35 +1,37 @@
-import {
-    StatisticItem,
-    countTotalFeedback,
-    countFeedbackPercentage,
-    Notifitation,
-} from "components";
+import StatisticItem from 'components/StatisticItem/StatisticItem';
 import css from './Statistics.module.css';
-const selectStatPercentage = 'Good';
-const Statistics = data => {
-    const keyArray = Object.keys(data.data);
-    const checkFeedbackCount = countTotalFeedback(data.data);
-    return checkFeedbackCount ? (
-      <ul className={css.statisticsList}>
-        {keyArray.map(item => {
-            return (
-                <li key={`${item}item`}>
-                  <StatisticItem itemKey={item} itemValue={data.data[item]} />
-                </li>
-              );
-            })}
-            <li>
-              <p>Total: {countTotalFeedback(data.data)}</p>
-            </li>
-            <li>
-            <p>
-          Positive Feedback:{' '}
-          {countFeedbackPercentage(selectStatPercentage, data.data)}%
-            </p>
+export default function ListStatistics({
+  good,
+  neutral,
+  bad,
+  total,
+  positivePercentage = 0,
+}) {
+  return (
+    <ul className={css.statisticslist}>
+      <li className={css.item} key={1}>
+        {' '}
+        <StatisticItem itemValue={good} itemKey={'Good'} />{' '}
+      </li>
+      <li className={css.item} key={2}>
+        {' '}
+        <StatisticItem itemValue={neutral} itemKey={'Neutral'} />{' '}
+      </li>
+      <li className={css.item} key={3}>
+        {' '}
+        <StatisticItem itemValue={bad} itemKey={'Bad'} />{' '}
+      </li>
+      <li className={css.item} key={4}>
+        {' '}
+        <StatisticItem itemValue={total} itemKey={'Total'} />{' '}
+      </li>
+      <li className={css.item} key={5}>
+        {' '}
+        <StatisticItem
+          itemValue={positivePercentage}
+          itemKey={'Positive feedback'}
+        />{' '}
       </li>
     </ul>
-  ) : (
-    <Notifitation />
   );
-};
-export default Statistics;
+}
